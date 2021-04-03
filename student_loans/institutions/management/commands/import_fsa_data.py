@@ -1,7 +1,6 @@
 from typing import Any, Optional
 
 from django.core.management.base import BaseCommand, CommandParser
-
 from openpyxl import load_workbook
 from openpyxl.xml.constants import MIN_ROW
 
@@ -143,5 +142,8 @@ class Command(BaseCommand):
                 },
             )
 
-            self.stdout.write(self.style.SUCCESS('Successfully Added loan data for "%s"' % institution.name))
-
+            self.stdout.write(
+                self.style.SUCCESS(
+                    'Successfully Added loan data for "%s"' % institution.name
+                )
+            )
