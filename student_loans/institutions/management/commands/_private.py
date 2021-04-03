@@ -1,5 +1,3 @@
-from re import L
-
 from student_loans.institutions.models import Institution
 
 DATA_STARTING_ROW = 8

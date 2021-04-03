@@ -1,2 +1,9 @@
 [tool.black]
-line_length = 88
+line-length = 88
+
+
+[tool.isort]
+default_section = "THIRDPARTY"
+known_first_party = "student_loans"
+known_django = "django"
+sections = ['FUTURE', 'STDLIB', 'DJANGO', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']

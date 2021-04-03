@@ -1,8 +1,8 @@
 from typing import Any, Optional
 
 from django.core.management.base import BaseCommand, CommandParser
+
 from openpyxl import load_workbook
-from openpyxl.xml.constants import MIN_ROW
 
 from student_loans.institutions.models import Award, Institution
 

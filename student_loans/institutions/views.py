@@ -1,12 +1,13 @@
 from rest_framework import permissions, viewsets
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from .models import Award, Institution
 from .serializers import AwardSerializer, InstitutionSerializer
 
 
-class InstitutionsApiViewSet(viewsets.ReadOnlyModelViewSet):
+class InstitutionsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     """
-    API endpoint that allows all institutions to be viewed
+    API endpoint that allows institutions to be viewed
     """
 
     queryset = Institution.objects.all().order_by("-created_at")
@@ -14,7 +15,7 @@ class InstitutionsApiViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class AwardApiViewSet(viewsets.ReadOnlyModelViewSet):
+class AwardsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows awards to be viewed
     """
