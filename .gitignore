@@ -7,3 +7,4 @@ __pycache__/
 /static-files/
 /media-files/
 /logs/
+.mypy_cache
