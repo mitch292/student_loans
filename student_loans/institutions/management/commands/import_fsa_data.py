@@ -28,6 +28,9 @@ class Command(BaseCommand):
         wb = load_workbook(options["file"])
         ws = wb["Quarterly Activity"]
         for row in ws.iter_rows(DATA_STARTING_ROW):
+            if row[NAME_COLUMN].value is None:
+                continue
+
             (institution, created) = Institution.objects.get_or_create(
                 source_id=row[SOURCE_ID_COLUMN].value,
                 defaults={
