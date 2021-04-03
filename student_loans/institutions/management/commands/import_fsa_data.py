@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
-from django.core.management.base import (BaseCommand, CommandError,
-                                         CommandParser)
+from django.core.management.base import BaseCommand, CommandParser
+
 from openpyxl import load_workbook
 from openpyxl.xml.constants import MIN_ROW
 
@@ -28,7 +28,7 @@ class Command(BaseCommand):
         quarter = options["quarter"]
         wb = load_workbook(options["file"])
         ws = wb["Quarterly Activity"]
-        for row in ws.iter_rows(8):
+        for row in ws.iter_rows(DATA_STARTING_ROW):
             (institution, created) = Institution.objects.get_or_create(
                 source_id=row[SOURCE_ID_COLUMN].value,
                 defaults={
@@ -38,7 +38,7 @@ class Command(BaseCommand):
                     "type": map_fsa_str_to_type(row[TYPE_COLUM].value),
                 },
             )
-            print(institution)
+
             Award.objects.update_or_create(
                 institution=institution,
                 year=year,
@@ -142,3 +142,6 @@ class Command(BaseCommand):
                     ].value,
                 },
             )
+
+            self.stdout.write(self.style.SUCCESS('Successfully Added loan data for "%s"' % institution.name))
+

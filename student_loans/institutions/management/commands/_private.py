@@ -2,6 +2,9 @@ from re import L
 
 from student_loans.institutions.models import Institution
 
+DATA_STARTING_ROW = 8
+
+# Data columns
 SOURCE_ID_COLUMN = 0
 NAME_COLUMN = 1
 STATE_COLUM = 2
