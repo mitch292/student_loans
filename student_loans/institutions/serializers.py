@@ -23,3 +23,21 @@ class AwardSerializer(serializers.ModelSerializer):
             "disbursements_count",
             "disbursements_amount",
         ]
+
+
+class AwardSummarySerializer(serializers.Serializer):
+    loans_originated_count = serializers.IntegerField()
+    loans_originated_amount = serializers.FloatField()
+    receipient_count = serializers.IntegerField()
+    disbursements_amount = serializers.FloatField()
+    disbursements_count = serializers.IntegerField()
+
+
+class QuarterAwardSerializer(AwardSummarySerializer):
+    quarter = serializers.IntegerField()
+    year = serializers.IntegerField()
+
+
+class SummarySerializer(serializers.Serializer):
+    total = AwardSummarySerializer()
+    quarterly = QuarterAwardSerializer(many=True)

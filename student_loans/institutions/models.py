@@ -30,11 +30,11 @@ class Institution(models.Model):
 
 class Award(models.Model):
     class LoanType(models.TextChoices):
-        DIRECT_SUBSIDIZED = "Direct Loan Subsidized"
-        DIRECT_UNSUBSIDIZED_UNDERGRADUATE = "Direct Loan Unsubsidized - Undergraduate"
-        DIRECT_UNSUBSIDIZED_GRADUATE = "Direct Loan Unsubsidized - Graduate"
-        DIRECT_PARENT_PLUS = "Direct Loan Parent Plus"
-        DIRECT_GRAD_PLUS = "Direct Loan Grad Plus"
+        DIRECT_SUBSIDIZED = "direct-loan-subsidized"
+        DIRECT_UNSUBSIDIZED_UNDERGRADUATE = "direct-loan-unsubsidized-undergraduate"
+        DIRECT_UNSUBSIDIZED_GRADUATE = "direct-loan-unsubsidized-graduate"
+        DIRECT_PARENT_PLUS = "direct-loan-parent-plus"
+        DIRECT_GRAD_PLUS = "direct-loan-grad-plus"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
