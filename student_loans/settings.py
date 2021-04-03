@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # third party
     "rest_framework",
     "django_extensions",
+    "django_filters",
     # local
     "student_loans.institutions",
 ]
@@ -122,6 +123,7 @@ STATIC_URL = "/static/"
 
 
 REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 25,
 }
