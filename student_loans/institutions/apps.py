@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class InstitutionsConfig(AppConfig):
-    name = "institutions"
+    name = "student_loans.institutions"
