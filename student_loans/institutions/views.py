@@ -16,7 +16,6 @@ class InstitutionsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
 
     queryset = Institution.objects.all().order_by("-created_at")
     serializer_class = InstitutionSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ["state", "zip", "type"]
 
 
@@ -27,7 +26,6 @@ class AwardsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
 
     queryset = Award.objects.all()
     serializer_class = AwardSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filterset_fields = ["year", "quarter", "loan_type"]
 
 
@@ -39,7 +37,6 @@ class SummaryView(APIView):
 
     queryset = Award.objects.all()
     serializer_class = SummarySerializer
-    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         fq = self.queryset

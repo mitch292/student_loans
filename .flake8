@@ -1,5 +1,5 @@
 [flake8]
 max-line-length = 88
 max-complexity = 12
-exclude = .git,.venv*/,.mypy_cache,config,logs
+exclude = .git,.venv*/,.mypy_cache,config,logs,frontend
 ignore = E501, W503, E203, F405, F403
