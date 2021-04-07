@@ -6,8 +6,7 @@ from rest_framework.views import APIView
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from .models import Award, Institution
-from .serializers import (AwardSerializer, InstitutionSerializer,
-                          SummarySerializer)
+from .serializers import AwardSerializer, InstitutionSerializer, SummarySerializer
 
 
 class InstitutionsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
@@ -33,6 +32,11 @@ class AwardsViewSet(NestedViewSetMixin, viewsets.ReadOnlyModelViewSet):
 
 
 class SummaryView(APIView):
+    """
+    API endpoint that will show a summary of information based on some params.
+    Valid params are "state" or "type".
+    """
+
     queryset = Award.objects.all()
     serializer_class = SummarySerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -49,22 +53,22 @@ class SummaryView(APIView):
             fq = fq.filter(loan_type=request.query_params["type"])
 
         total = fq.aggregate(
-            Sum("receipient_count"),
-            Sum("loans_originated_count"),
-            Sum("loans_originated_amount"),
-            Sum("disbursements_count"),
-            Sum("disbursements_amount"),
+            receipient_count=Sum("receipient_count"),
+            loans_originated_count=Sum("loans_originated_count"),
+            loans_originated_amount=Sum("loans_originated_amount"),
+            disbursements_count=Sum("disbursements_count"),
+            disbursements_amount=Sum("disbursements_amount"),
         )
 
         quarterly = (
             fq.values("year", "quarter")
             .order_by()
             .annotate(
-                Sum("receipient_count"),
-                Sum("loans_originated_count"),
-                Sum("loans_originated_amount"),
-                Sum("disbursements_count"),
-                Sum("disbursements_amount"),
+                receipient_count=Sum("receipient_count"),
+                loans_originated_count=Sum("loans_originated_count"),
+                loans_originated_amount=Sum("loans_originated_amount"),
+                disbursements_count=Sum("disbursements_count"),
+                disbursements_amount=Sum("disbursements_amount"),
             )
         )
 
